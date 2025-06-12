@@ -162,18 +162,21 @@ void olc6502::SetFlag(FLAGS6502 f, bool v)
 		status &= ~f;
 }
 
+// implied
 uint8_t olc6502::IMP()
 {
 	fetched = a;
 	return 0;
 }
 
+// immediate
 uint8_t olc6502::IMM()
 {
 	addr_abs = pc++;
 	return 0;
 }
 
+// zero page
 uint8_t olc6502::ZP0()
 {
 	addr_abs = read(pc);
@@ -182,6 +185,7 @@ uint8_t olc6502::ZP0()
 	return 0;
 }
 
+// zero page x offset
 uint8_t olc6502::ZPX()
 {
 	addr_abs = (read(pc) + x);
@@ -190,6 +194,7 @@ uint8_t olc6502::ZPX()
 	return 0;
 }
 
+// zero page y offset
 uint8_t olc6502::ZPY()
 {
 	addr_abs = (read(pc) + y);
@@ -198,6 +203,7 @@ uint8_t olc6502::ZPY()
 	return 0;
 }
 
+// relative
 uint8_t olc6502::REL()
 {
 	addr_rel = read(pc);
@@ -207,6 +213,7 @@ uint8_t olc6502::REL()
 	return 0;
 }
 
+// absolute
 uint8_t olc6502::ABS()
 {
 	uint16_t lo = read(pc);
@@ -219,6 +226,7 @@ uint8_t olc6502::ABS()
 	return 0;
 }
 
+// absolute x offset
 uint8_t olc6502::ABX()
 {
 	uint16_t lo = read(pc);
@@ -235,6 +243,7 @@ uint8_t olc6502::ABX()
 		return 0;
 }
 
+// absolute y offset
 uint8_t olc6502::ABY()
 {
 	uint16_t lo = read(pc);
@@ -251,6 +260,8 @@ uint8_t olc6502::ABY()
 		return 0;
 }
 
+
+// indirect
 uint8_t olc6502::IND()
 {
 	uint16_t ptr_lo = read(pc);
@@ -262,7 +273,7 @@ uint8_t olc6502::IND()
 
 	if (ptr_lo == 0x00FF)
 	{
-		addr_abs = (read(ptr & 0xFF00) << 8) | read(ptr + 0);
+		addr_abs = (read(ptr & 0xFF00) << 8) | read(ptr + 0); // fix pointer shit
 	}
 	else
 	{
@@ -272,6 +283,7 @@ uint8_t olc6502::IND()
 	return 0;
 }
 
+// indirect x offset
 uint8_t olc6502::IZX()
 {
 	uint16_t t = read(pc);
@@ -285,6 +297,7 @@ uint8_t olc6502::IZX()
 	return 0;
 }
 
+// indirect y offset
 uint8_t olc6502::IZY()
 {
 	uint16_t t = read(pc);
