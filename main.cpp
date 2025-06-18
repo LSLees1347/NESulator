@@ -19,14 +19,13 @@ public:
 
 	bool OnUserUpdate(float fElapsedTime)
 	{
-		Clear(olc::VERY_DARK_GREY);
-
-
-		if (GetKey(olc::Key::SPACE).bPressed)
+		if (GetKey(olc::Key::ESCAPE).bPressed)
 		{
 			return false;
 		}
-		DrawString(10, 10, "sup");
+
+		Clear(olc::VERY_DARK_GREY);
+		FillRect(25, 25, 15, 15, olc::DARK_GREEN);
 
 		return true;
 	}
@@ -36,7 +35,7 @@ public:
 int main()
 {
 	Demo_olc6502 demo;
-	demo.Construct(680, 480, 2, 2);
+	demo.Construct(640, 360, 2, 2);
 	demo.Start();
 	return 0;
 }
