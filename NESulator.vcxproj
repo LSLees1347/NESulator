@@ -125,7 +125,7 @@
   <ItemGroup>
     <ClInclude Include="Bus.h" />
     <ClInclude Include="olc6502.h" />
-    <ClInclude Include="olcPixelGameEngine.h" />
+    <ClInclude Include="engine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bus.cpp" />
